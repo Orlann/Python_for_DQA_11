@@ -18,7 +18,7 @@ class Massage:
         print(f"{self.__class__.__name__} --------------")
         print(f"{self.text}")
 
-    def save_to_file(self, file_name="messages.txt"):
+    def save_to_file(self, file_name="output_messages.txt"):
         """Save the message text to a given .txt file."""
         with open('messages.txt', "a", encoding="utf-8") as file:
             file.write(f"{self.__class__.__name__} --------------\n")
@@ -52,7 +52,7 @@ class News(Massage):
         super().print_message()
         print(f"{self.city}, {self.date}")
 
-    def save_to_file(self, file_name="messages.txt"):
+    def save_to_file(self, file_name="output_messages.txt"):
         """Save News-specific details to the file."""
         with open(file_name, "a", encoding="utf-8") as file:
             file.write(f"News --------------\n")
@@ -85,7 +85,7 @@ class PrivateAdd(Massage):
         super().print_message()
         print(f"Actual until: {self.expiration_date.strftime('%d/%m/%Y')}, {self.remaining_days} days left")
 
-    def save_to_file(self, file_name="messages.txt"):
+    def save_to_file(self, file_name="output_messages.txt"):
         """Save PrivateAdd-specific details to the file."""
         with open(file_name, "a", encoding="utf-8") as file:
             file.write(f"Private Advertisement --------------\n")
@@ -117,7 +117,7 @@ class Sale(Massage):
         super().print_message()
         print(f"Price: {self.price} $, for Visa payment there is 10 % discount - price: {self.visa_discount} $")
 
-    def save_to_file(self, file_name="messages.txt"):
+    def save_to_file(self, file_name="output_messages.txt"):
         """Save Sale-specific details to the file."""
         with open(file_name, "a", encoding="utf-8") as file:
             file.write(f"Sale --------------\n")
@@ -170,8 +170,6 @@ class ConsoleInputHandler:
         while True:
             choice = input(prompt).strip().lower()
             if choice in ['y', 'yes']:
-                # TODO
-                # write to text file
                 return True
             elif choice in ['n', 'no']:
                 return False

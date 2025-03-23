@@ -116,6 +116,11 @@ def normalize_text(sentences: list) -> list:
     return cap_sentences
 
 
+def case_correction(text):
+    correct_text = text.lstrip().capitalize()
+    return correct_text
+
+
 def get_last_word(cap_sentences: list) -> list:
     """
     Get last word from every sentence.
