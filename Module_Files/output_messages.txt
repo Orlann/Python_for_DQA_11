@@ -162,3 +162,7 @@ Sale --------------
 Sale_5 - backpack
 Price: 50.0 $, for Visa payment there is a 10% discount - price: 45.0 $
 
+News --------------
+Still cloudy
+Lviv, 26/03/2025 01:25
+

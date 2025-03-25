@@ -5,6 +5,7 @@ from datetime import datetime
 # sys.path.append(r"C:\Users\anna_orlovska\Documents\OrlAnn\Epam\Python_for_DQA_11\Project\Python_for_DQA_11")
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))     # adding one level up folder to sys.path
 from Functions import case_correction
+from Csv_files import *
 
 
 class Massage:
@@ -447,6 +448,13 @@ def main():
     elif input_source == 2:
         file_handler = FileInputHandler()
         file_handler.handle_file_input()
+
+    # Added functionality from module 'CSV-files'
+    input_list = read_from_file('output_messages.txt')
+    count_dict = words_count(input_list)
+    write_to_csv_without_header(count_dict)
+    letters_statistic = letter_count(input_list)
+    write_to_csv_with_header(letters_statistic)
 
 
 if __name__ == "__main__":
