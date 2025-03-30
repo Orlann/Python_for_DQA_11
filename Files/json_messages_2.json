@@ -1,0 +1,16 @@
+[{
+  "type": "News",
+  "text": "Many skyscrapers",
+  "add_parameter": "Los Angeles"
+},
+{
+    "type": "Private Add",
+    "text": "Can help with home cleaning",
+    "add_parameter": "28-04-2025"
+},
+{
+    "type": "Sale",
+    "text": "Roller blades",
+    "add_parameter": "60"
+}
+]

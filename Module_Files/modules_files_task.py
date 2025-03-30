@@ -1,5 +1,6 @@
 import sys
 import os
+import json
 from abc import ABC, abstractmethod  # For abstract base class
 from datetime import datetime
 # sys.path.append(r"C:\Users\anna_orlovska\Documents\OrlAnn\Epam\Python_for_DQA_11\Project\Python_for_DQA_11")
@@ -440,14 +441,113 @@ class FileInputHandler(InputHandler):
             raise ValueError("The file does not contain a valid date in the format DD-MM-YYYY.")
 
 
+class JsonInputHandler(InputHandler):
+    def __init__(self):
+        super().__init__()
+
+    def get_string(self, prompt):
+        """Default implementation for get_string."""
+        return input(prompt)
+
+    def get_float(self, prompt):
+        """Default implementation for get_float."""
+        while True:
+            try:
+                return float(input(prompt))
+            except ValueError:
+                print("Invalid number. Please try again.")
+
+    def get_date(self, prompt):
+        """Default implementation for get_date."""
+        while True:
+            try:
+                return datetime.strptime(input(prompt), "%d-%m-%Y")
+            except ValueError:
+                print("Invalid date format. Please use DD-MM-YYYY.")
+
+    def get_json_path(self):
+        """
+        Decide whether to use a default file or request a custom file path.
+        Returns the selected file path (default or user-provided).
+        Loops until a valid file path is provided or user chooses to exit.
+        """
+        while True:
+            use_default_file = input("Do you want to use the default JSON file ('json_messages.json')? (y/n): ").strip().lower()
+
+            if use_default_file in ["y", "yes"]:
+                json_path = "json_messages.json"  # Default file path
+                print(f"Default file selected: {json_path}")
+                return json_path
+            elif use_default_file in ["n", "no"]:
+                json_path = input("Enter the full JSON file path: ").strip()
+                if os.path.exists(json_path):
+                    print(f"Custom file selected: {json_path}")
+                    return json_path
+                else:
+                    print(f"Error: File not found at '{json_path}'. Please provide a valid file path.")
+            else:
+                print("Invalid choice. Enter 'y' for default file or 'n' to provide a custom file path.")
+
+    # JsonHandler-specific methods
+    def load_json(self, json_path):
+        # json_path = self.get_json_path()
+        if not json_path:
+            return  # Skip if no valid file path
+
+        try:
+            with open(json_path, "r", encoding="utf-8") as file:
+                data = json.load(file)
+                return data
+        except FileNotFoundError:
+            print(f"Error: File '{json_path}' not found.")
+            return None
+        except json.JSONDecodeError:
+            print(f"Error: Could not parse JSON in '{json_path}'.")
+            return None
+
+    def json_get_message(self, data):
+        if isinstance(data, list):
+            data_to_message = data
+        elif isinstance(data, dict):
+            data_to_message = [data]
+            print(data_to_message)
+        else:
+            data_to_massage = []
+            print('another data type')
+        for message in data_to_message:
+            message_type = message.get('type')
+            if message_type.lower() == 'news':
+                self.create_news(message.get('text'), message.get('add_parameter'))
+            elif message_type.lower() == 'private add':
+                self.create_private_add(message.get('text'), datetime.strptime(message.get('add_parameter'), "%d-%m-%Y"))
+            elif message_type.lower() == 'sale':
+                self.create_sale(message.get('text'), float(message.get('add_parameter')))
+            else:
+                return
+
+    def handle_json_input(self):
+        json_path = self.get_json_path()
+        data = self.load_json(json_path)
+        self.json_get_message(data)
+
+        try:
+            os.remove(json_path)
+            print(f"\nInput file '{json_path}' has been deleted.")
+        except Exception as e:
+            print(f"Error: Unable to delete the file '{json_path}'. Reason: {e}")
+
+
 def main():
-    input_source = int(input("Choose input source (1 - console / 2 - file): ").strip())
+    input_source = int(input("Choose input source \n1 - console\n2 - text file\n3 - JSON\n").strip())
     if input_source == 1:
         handler = ConsoleInputHandler()
         handler.create_message()
     elif input_source == 2:
         file_handler = FileInputHandler()
         file_handler.handle_file_input()
+    elif input_source == 3:
+        json_handler = JsonInputHandler()
+        json_handler.handle_json_input()
 
     # Added functionality from module 'CSV-files'
     input_list = read_from_file('output_messages.txt')

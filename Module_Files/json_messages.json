@@ -1,0 +1,16 @@
+[{
+  "type": "News",
+  "text": "Has an Lodz Poltecnika",
+  "add_parameter": "Lodz"
+},
+{
+    "type": "Private Add",
+    "text": "2 tickets to OE",
+    "add_parameter": "28-04-2025"
+},
+{
+    "type": "Sale",
+    "text": "Bad",
+    "add_parameter": "500"
+}
+]
