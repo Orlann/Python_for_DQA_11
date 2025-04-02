@@ -1,0 +1,26 @@
+<messages>
+    <News>
+        <text>Flooding in Greece</text>
+        <city>Islands</city>
+    </News>
+    <News>
+        <text>Weather update: Rain expected tomorrow.</text>
+        <city>London</city>
+    </News>
+    <PrivateAdd>
+        <text>Roommate needed urgently</text>
+        <expiration_date>15-05-2025</expiration_date>
+    </PrivateAdd>
+    <PrivateAdd>
+        <text>Office space for rent</text>
+        <expiration_date>01-06-2025</expiration_date>
+    </PrivateAdd>
+    <Sale>
+        <text>Apartments on Shevchenka str., 5 rooms, 200 sq.m.</text>
+        <price>98000</price>
+    </Sale>
+    <Sale>
+        <text>Exclusive price for headset FA-21 for Black Friday in Auchan!</text>
+        <price>299.99</price>
+    </Sale>
+</messages>

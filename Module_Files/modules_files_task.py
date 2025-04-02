@@ -1,6 +1,7 @@
 import sys
 import os
 import json
+import xml.etree.ElementTree as ET
 from abc import ABC, abstractmethod  # For abstract base class
 from datetime import datetime
 # sys.path.append(r"C:\Users\anna_orlovska\Documents\OrlAnn\Epam\Python_for_DQA_11\Project\Python_for_DQA_11")
@@ -537,8 +538,117 @@ class JsonInputHandler(InputHandler):
             print(f"Error: Unable to delete the file '{json_path}'. Reason: {e}")
 
 
+class XmlInputHandler(InputHandler):
+    def __init__(self):
+        super().__init__()
+
+    def get_string(self, prompt):
+        """Default implementation for get_string."""
+        return input(prompt)
+
+    def get_float(self, prompt):
+        """Default implementation for get_float."""
+        while True:
+            try:
+                return float(input(prompt))
+            except ValueError:
+                print("Invalid number. Please try again.")
+
+    def get_date(self, prompt):
+        """Default implementation for get_date."""
+        while True:
+            try:
+                return datetime.strptime(input(prompt), "%d-%m-%Y")
+            except ValueError:
+                print("Invalid date format. Please use DD-MM-YYYY.")
+
+    def get_xml_path(self):
+        """
+        Decide whether to use a default file or request a custom file path.
+        Returns the selected file path (default or user-provided).
+        Loops until a valid file path is provided or user chooses to exit.
+        """
+        while True:
+            use_default_file = input("Do you want to use the default XML file ('xml_messages.xml')? (y/n): ").strip().lower()
+
+            if use_default_file in ["y", "yes"]:
+                xml_path = "xml_messages.xml"  # Default file path
+                print(f"Default file selected: {xml_path}")
+                return xml_path
+            elif use_default_file in ["n", "no"]:
+                xml_path = input("Enter the full XML file path: ").strip()
+                if os.path.exists(xml_path):
+                    print(f"Custom file selected: {xml_path}")
+                    return xml_path
+                else:
+                    print(f"Error: File not found at '{xml_path}'. Please provide a valid file path.")
+            else:
+                print("Invalid choice. Enter 'y' for default file or 'n' to provide a custom file path.")
+
+    # XmlHandler-specific methods
+    def load_xml(self, xml_path):
+        if not xml_path:
+            return  # Skip if no valid file path
+
+        try:
+            tree = ET.parse(xml_path)
+            root = tree.getroot()
+            return root
+        except FileNotFoundError:
+            print(f"Error: File '{xml_path}' not found.")
+            return None
+        except ET.ParseError:
+            print(f"Error: Failed to parse XML in file '{xml_path}'. Make sure the file is well-formed.")
+
+    def xml_get_message(self, root):
+        if root is None:
+            print("Error: no XML root element found")
+            return []
+
+        for element in root:
+            message_type = element.tag
+
+            if message_type.lower() == 'news':
+                text = element.find("text").text if element.find("text") is not None else "Default News Text"
+                city = element.find("city").text if element.find("city") is not None else "Default City"
+                self.create_news(text, city)
+
+            elif message_type.lower() == 'privateadd':
+                text = element.find('text').text if element.find('text') is not None else 'Default Private Ad Text'
+                expiration_date_str = element.find('expiration_date').text if element.find('expiration_date') is not None else '01-01-2025'
+                try:
+                    expiration_date = datetime.strptime(expiration_date_str, "%d-%m-%Y")
+                except ValueError:
+                    expiration_date = datetime.now()  # Default to current date if invalid
+                self.create_private_add(text, expiration_date)
+
+            elif message_type.lower() == 'sale':
+                text = element.find('text').text if element.find('text') is not None else 'Default Sale Text'
+                try:
+                    price = float(element.find('price').text) if element.find('price') is not None else 0.0
+                except ValueError:
+                    price = 0.0  # Default to 0 if invalid
+                self.create_sale(text, price)
+
+            else:
+                print(f"Unknown message type: '{message_type}'. Skipping element.")
+
+        # return messages
+    #
+    def handle_xml_input(self):
+        xml_path = self.get_xml_path()
+        root = self.load_xml(xml_path)
+        self.xml_get_message(root)
+
+        try:
+            os.remove(xml_path)
+            print(f"\nInput file '{xml_path}' has been deleted.")
+        except Exception as e:
+            print(f"Error: Unable to delete the file '{xml_path}'. Reason: {e}")
+
+
 def main():
-    input_source = int(input("Choose input source \n1 - console\n2 - text file\n3 - JSON\n").strip())
+    input_source = int(input("Choose input source \n1 - console\n2 - text file\n3 - JSON\n4 - XML\n").strip())
     if input_source == 1:
         handler = ConsoleInputHandler()
         handler.create_message()
@@ -548,6 +658,9 @@ def main():
     elif input_source == 3:
         json_handler = JsonInputHandler()
         json_handler.handle_json_input()
+    elif input_source == 4:
+        xml_handler = XmlInputHandler()
+        xml_handler.handle_xml_input()
 
     # Added functionality from module 'CSV-files'
     input_list = read_from_file('output_messages.txt')

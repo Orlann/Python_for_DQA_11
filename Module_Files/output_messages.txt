@@ -196,3 +196,87 @@ Sale --------------
 Bad
 Price: 500.0 $, for Visa payment there is a 10% discount - price: 450.0 $
 
+News --------------
+Default News Text
+Default City, 02/04/2025 23:59
+
+Private Advertisement --------------
+Default Private Ad Text
+Actual until: 01/01/2025, 0 days left
+
+Sale --------------
+Default Sale Text
+Price: 0.0 $, for Visa payment there is a 10% discount - price: 0.0 $
+
+News --------------
+New casino opens!
+New York, 03/04/2025 00:09
+
+Private Advertisement --------------
+Roommate needed for UKU dormitory
+Actual until: 15/05/2025, 41 days left
+
+Sale --------------
+Persian kitten
+Price: 15.0 $, for Visa payment there is a 10% discount - price: 13.5 $
+
+News --------------
+Flooding in Greece
+Islands, 03/04/2025 00:16
+
+News --------------
+Weather update: Rain expected tomorrow.
+London, 03/04/2025 00:16
+
+Private Advertisement --------------
+Roommate needed urgently
+Actual until: 15/05/2025, 41 days left
+
+Private Advertisement --------------
+Office space for rent
+Actual until: 01/06/2025, 58 days left
+
+Sale --------------
+Apartments on Shevchenka str., 5 rooms, 200 sq.m.
+Price: 98000.0 $, for Visa payment there is a 10% discount - price: 88200.0 $
+
+Sale --------------
+Exclusive price for headset FA-21 for Black Friday in Auchan!
+Price: 299.99 $, for Visa payment there is a 10% discount - price: 269.99100000000004 $
+
+News --------------
+New casino opens!
+New York, 03/04/2025 00:18
+
+Private Advertisement --------------
+Roommate needed for UKU dormitory
+Actual until: 15/05/2025, 41 days left
+
+Sale --------------
+Persian kitten
+Price: 15.0 $, for Visa payment there is a 10% discount - price: 13.5 $
+
+News --------------
+Flooding in Greece
+Islands, 03/04/2025 00:19
+
+News --------------
+Weather update: Rain expected tomorrow.
+London, 03/04/2025 00:19
+
+Private Advertisement --------------
+Roommate needed urgently
+Actual until: 15/05/2025, 41 days left
+
+Private Advertisement --------------
+Office space for rent
+Actual until: 01/06/2025, 58 days left
+
+Sale --------------
+Apartments on Shevchenka str., 5 rooms, 200 sq.m.
+Price: 98000.0 $, for Visa payment there is a 10% discount - price: 88200.0 $
+
+Sale --------------
+Exclusive price for headset FA-21 for Black Friday in Auchan!
+Price: 299.99 $, for Visa payment there is a 10% discount - price: 269.99100000000004 $
+
