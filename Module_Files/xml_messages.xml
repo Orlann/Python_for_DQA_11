@@ -1,0 +1,14 @@
+<messages>
+    <News>
+        <text>New casino opens!</text>
+        <city>New York</city>
+    </News>
+    <PrivateAdd>
+        <text>Roommate needed for UKU dormitory</text>
+        <expiration_date>15-05-2025</expiration_date>
+    </PrivateAdd>
+    <Sale>
+        <text>Persian kitten</text>
+        <price>15</price>
+    </Sale>
+</messages>

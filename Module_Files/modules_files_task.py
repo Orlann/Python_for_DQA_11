@@ -2,6 +2,8 @@ import sys
 import os
 import json
 import xml.etree.ElementTree as ET
+import pyodbc
+
 from abc import ABC, abstractmethod  # For abstract base class
 from datetime import datetime
 # sys.path.append(r"C:\Users\anna_orlovska\Documents\OrlAnn\Epam\Python_for_DQA_11\Project\Python_for_DQA_11")
@@ -136,8 +138,8 @@ class Sale(Massage):
 
 class InputHandler(ABC):
     """General input handler for both console and file processing."""
-    def __init__(self):
-        pass
+    def __init__(self, database_handler=None):
+        self.database_handler = database_handler
 
     @abstractmethod
     def get_string(self, prompt):
@@ -172,27 +174,56 @@ class InputHandler(ABC):
     def create_news(self, text, city):
         """Create and return a News object."""
         date = datetime.now()
+        formatted_date = date.strftime("%d/%m/%Y %H:%M")
         message = News(city=city, text=text, date=date.strftime("%d/%m/%Y %H:%M"))
         message.save_to_file()
+        if self.database_handler:
+            self.database_handler.insert_message(
+                message_type="news",
+                message_text=message.text,
+                additional_param=message.city,
+                calculated_param=formatted_date
+            )
+        else:
+            print('No connection found during News creation.')
         return message
 
     def create_private_add(self, text, expiration_date):
         """Create and return a PrivateAdd object."""
         message = PrivateAdd(text=text, expiration_date=expiration_date)
         message.save_to_file()
+        if self.database_handler:
+            self.database_handler.insert_message(
+                message_type="private add",
+                message_text=message.text,
+                additional_param=message.expiration_date,
+                calculated_param=message.remaining_days
+            )
+        else:
+            print('No connection found during Private Add creation.')
         return message
 
     def create_sale(self, text, price):
         """Create and return a Sale object."""
         message = Sale(text=text, price=price)
         message.save_to_file()
+        if self.database_handler:
+            self.database_handler.insert_message(
+                message_type="sale",
+                message_text=message.text,
+                additional_param=message.price,
+                calculated_param=message.visa_discount
+            )
+        else:
+            print('No connection found during Sale creation.')
         return message
 
 
 class ConsoleInputHandler(InputHandler):
     """Handle console-based input."""
-    def __init__(self):
-        super().__init__()
+    def __init__(self, db_handler=None):
+        super().__init__(database_handler=db_handler)
+        self.db_handler = db_handler
         print("Console Input Initialized!")
 
     def get_string(self, prompt="Enter a string: "):
@@ -222,7 +253,7 @@ class ConsoleInputHandler(InputHandler):
     def create_message(self):
         """Create a message object based on user's choice."""
         message_type = self.get_choice(
-            ["News", "Private ad", "Sale"],
+            ["News", "Private add", "Sale"],
             "What message type do you want to input?"
         )
 
@@ -230,7 +261,7 @@ class ConsoleInputHandler(InputHandler):
             city = case_correction(self.get_string("Enter the city: "))
             text = case_correction(self.get_string("Enter the news text: "))
             return self.create_news(text, city)
-        elif message_type == "Private ad":
+        elif message_type == "Private add":
             text = case_correction(self.get_string("Enter the advertisement text: "))
             expiration_date = self.get_date("Enter the expiration date (DD-MM-YYYY): ")
             return self.create_private_add(text, expiration_date)
@@ -245,8 +276,9 @@ class ConsoleInputHandler(InputHandler):
 
 class FileInputHandler(InputHandler):
     """Handle file-based input."""
-    def __init__(self):
-        super().__init__()  # No file path provided at initialization
+    def __init__(self, db_handler=None):
+        super().__init__(database_handler=db_handler)
+        self.db_handler = db_handler
         self.file_data = []  # Initialize an empty list for file data
 
     def get_file_path(self):
@@ -305,12 +337,14 @@ class FileInputHandler(InputHandler):
 
         if message_type.lower() == "news":
             date = datetime.now().strftime("%d/%m/%Y %H:%M")  # Use the current date/time
-            return News(city=case_correction(additional_param), text=text, date=date)
+            message = self.create_news(city=case_correction(additional_param), text=text)
+            return message
 
         elif message_type.lower() == "privatead":
             try:
                 expiration_date = datetime.strptime(additional_param, "%d-%m-%Y")
-                return PrivateAdd(text=text, expiration_date=expiration_date)
+                message = self.create_private_add(text=text, expiration_date=expiration_date)
+                return message
             except ValueError:
                 print(f"Skipping invalid expiration_date: {additional_param}")
                 return None
@@ -318,7 +352,8 @@ class FileInputHandler(InputHandler):
         elif message_type.lower() == "sale":
             try:
                 price = float(additional_param)
-                return Sale(text=text, price=price)
+                message = self.create_sale(text, price)
+                return message
             except ValueError:
                 print(f"Skipping invalid price: {additional_param}")
                 return None
@@ -351,13 +386,13 @@ class FileInputHandler(InputHandler):
             additional_param = components[2].strip()
 
             if message_type.lower() == "news":
-                date = datetime.now().strftime("%d/%m/%Y %H:%M")
-                message = News(city=case_correction(additional_param), text=text, date=date)
+                # date = datetime.now().strftime("%d/%m/%Y %H:%M")
+                self.create_news(city=case_correction(additional_param), text=text)
 
             elif message_type.lower() == "privatead":
                 try:
                     expiration_date = datetime.strptime(additional_param, "%d-%m-%Y")
-                    message = PrivateAdd(text=text, expiration_date=expiration_date)
+                    message = self.create_private_add(text=text, expiration_date=expiration_date)
                 except ValueError:
                     print(f"Skipping invalid expiration_date: {additional_param}")
                     continue
@@ -365,7 +400,7 @@ class FileInputHandler(InputHandler):
             elif message_type.lower() == "sale":
                 try:
                     price = float(additional_param)
-                    message = Sale(text=text, price=price)
+                    message = self.create_sale(text, price)
                 except ValueError:
                     print(f"Skipping invalid price: {additional_param}")
                     continue
@@ -401,6 +436,7 @@ class FileInputHandler(InputHandler):
             if message:
                 print("\nProcessed Single Record")
                 message.save_to_file()
+
             else:
                 print("\nNo valid record found.")
         elif file_type == 2:
@@ -443,8 +479,9 @@ class FileInputHandler(InputHandler):
 
 
 class JsonInputHandler(InputHandler):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, db_handler=None):
+        super().__init__(database_handler=db_handler)
+        self.db_handler = db_handler
 
     def get_string(self, prompt):
         """Default implementation for get_string."""
@@ -539,8 +576,9 @@ class JsonInputHandler(InputHandler):
 
 
 class XmlInputHandler(InputHandler):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, db_handler=None):
+        super().__init__(database_handler=db_handler)
+        self.db_handler = db_handler
 
     def get_string(self, prompt):
         """Default implementation for get_string."""
@@ -647,19 +685,109 @@ class XmlInputHandler(InputHandler):
             print(f"Error: Unable to delete the file '{xml_path}'. Reason: {e}")
 
 
+class DatabaseHandler:
+    def __init__(self, db_path):
+        self.connection_string = f"DRIVER=SQLite3 ODBC Driver;DATABASE={db_path};"
+        self.connection = None
+
+    def connect(self):
+        try:
+            self.connection = pyodbc.connect(self.connection_string)
+            cursor = self.connection.cursor()
+            return cursor
+        except pyodbc.Error as e:
+            print(f"Failed to connect to the database: {e}")
+
+    def close_connection(self):
+        if self.connection:
+            self.connection.close()
+
+    def create_tables(self):
+        try:
+            cursor = self.connect()
+
+            # Create News table
+            cursor.execute('CREATE TABLE IF NOT EXISTS News (text TEXT, city TEXT,date TEXT);')
+
+            # Create PrivateAdd table
+            cursor.execute('CREATE TABLE IF NOT EXISTS PrivateAdd (text TEXT, expiration_date TEXT, valid INTEGER);')
+
+            # Create Sale table
+            cursor.execute('CREATE TABLE IF NOT EXISTS Sale (text TEXT, price REAL, discount REAL);')
+
+            self.connection.commit()
+        except pyodbc.Error as e:
+            print(f"Failed to create tables: {e}")
+
+    def insert_message(self, message_type, message_text, additional_param, calculated_param):
+        if not self.connection:
+            print("No active database connection.")
+            return
+        try:
+            cursor = self.connection.cursor()
+
+            if message_type.lower() == "news":
+                cursor.execute('SELECT 1 FROM News WHERE text = ? AND city = ? AND date = ?', (message_text, additional_param, calculated_param))
+                existing_record = cursor.fetchone()
+                if existing_record:
+                    print("Skipped insertion due to the duplicate.")
+                else:
+                    cursor.execute("INSERT INTO News VALUES (?, ?, ?)", (message_text, additional_param, calculated_param))
+            elif message_type.lower() == "private add":
+                cursor.execute('SELECT 1 FROM PrivateAdd WHERE text = ? AND expiration_date = ? AND valid = ?',
+                               (message_text, additional_param, calculated_param))
+                existing_record = cursor.fetchone()
+                if existing_record:
+                    print("Skipped insertion due to the duplicate.")
+                else:
+                    cursor.execute("INSERT INTO PrivateAdd VALUES (?, ?, ?)", (message_text, additional_param, calculated_param))
+            elif message_type.lower() == "sale":
+                cursor.execute('SELECT 1 FROM Sale WHERE text = ? AND price = ? AND discount = ?',
+                               (message_text, additional_param, calculated_param))
+                existing_record = cursor.fetchone()
+                if existing_record:
+                    print("Skipped insertion due to the duplicate.")
+                cursor.execute("INSERT INTO Sale VALUES (?, ?, ?)", (message_text, additional_param, calculated_param))
+            else:
+                print(f"Unknown message type: {message_type}")
+                return
+
+            self.connection.commit()
+
+        except pyodbc.Error as e:
+            print(f"Failed to insert message: {e}")
+
+    def fetch_all(self, table_name):
+        if not self.connection:
+            print("No active database connection.")
+            return []
+        try:
+            cursor = self.connection.cursor()
+            cursor.execute(f"SELECT * FROM {table_name}")
+            rows = cursor.fetchall()
+            return rows
+        except pyodbc.Error as e:
+            print(f"Failed to fetch rows: {e}")
+            return []
+
+
 def main():
+    db_handler = DatabaseHandler('massages.db')
+    db_handler.connect()
+    db_handler.create_tables()
+
     input_source = int(input("Choose input source \n1 - console\n2 - text file\n3 - JSON\n4 - XML\n").strip())
     if input_source == 1:
-        handler = ConsoleInputHandler()
+        handler = ConsoleInputHandler(db_handler)
         handler.create_message()
     elif input_source == 2:
-        file_handler = FileInputHandler()
+        file_handler = FileInputHandler(db_handler)
         file_handler.handle_file_input()
     elif input_source == 3:
-        json_handler = JsonInputHandler()
+        json_handler = JsonInputHandler(db_handler)
         json_handler.handle_json_input()
     elif input_source == 4:
-        xml_handler = XmlInputHandler()
+        xml_handler = XmlInputHandler(db_handler)
         xml_handler.handle_xml_input()
 
     # Added functionality from module 'CSV-files'
@@ -668,6 +796,11 @@ def main():
     write_to_csv_without_header(count_dict)
     letters_statistic = letter_count(input_list)
     write_to_csv_with_header(letters_statistic)
+
+    print(db_handler.fetch_all('News'))
+    print(db_handler.fetch_all('PrivateAdd'))
+    print(db_handler.fetch_all('Sale'))
+    db_handler.close_connection()
 
 
 if __name__ == "__main__":

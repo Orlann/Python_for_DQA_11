@@ -1,54 +1,6 @@
-News --------------
-News 1 - Sunny next 6 days
-Kyiv, 23/03/2025 18:21
-
-News --------------
-News 3 - Gulf of Mexico was renamed to Gulf of USA
-USA, 23/03/2025 18:22
-
-News --------------
-News 4 - AliExpres got the reword for the best marketplace
-China, 23/03/2025 18:22
-
-News --------------
-AAAAAAA
-BBBBBBBBBB, 23/03/2025 18:27
-
-Sale --------------
-Sale_3 - Set of asian plates
-Price: 200.0 $, for Visa payment there is a 10% discount - price: 180.0 $
-
-Sale --------------
-Sale_4 - Mona Lisa
-Price: 50000.0 $, for Visa payment there is a 10% discount - price: 45000.0 $
-
-Sale --------------
-Sale_5 - Backpack
-Price: 50.0 $, for Visa payment there is a 10% discount - price: 45.0 $
-
-News --------------
-jfjfjfjfjf
-Liverpul, 23/03/2025 19:21
-
-News --------------
-Capital of Madagascar
-Antananarivu, 23/03/2025 19:24
-
-News --------------
-Scorcher
-Lalabalusa, 23/03/2025 19:29
-
 Private Advertisement --------------
-Rainy day - jets don't fly
-Actual until: 25/12/2025, 276 days left
-
-Private Advertisement --------------
-Flooding in the suburb
-Actual until: 20/04/2025, 27 days left
-
-Sale --------------
-Green  trees
-Price: 10.0 $, for Visa payment there is a 10% discount - price: 9.0 $
+Privatead_3 - the bb library will be closed
+Actual until: 30/04/2024, 0 days left
 
 Private Advertisement --------------
 Privatead_3 - the bb library will be closed
@@ -56,7 +8,15 @@ Actual until: 30/04/2024, 0 days left
 
 News --------------
 News 3 - gulf of mexico was renamed to gulf of usa
-Usa, 23/03/2025 19:32
+Usa, 08/04/2025 00:04
+
+Private Advertisement --------------
+Privatead_3 - the bb library will be closed
+Actual until: 30/04/2024, 0 days left
+
+Sale --------------
+Sale_4 - mona lisa
+Price: 50000.0 $, for Visa payment there is a 10% discount - price: 45000.0 $
 
 Sale --------------
 Sale_4 - mona lisa
@@ -66,13 +26,29 @@ Private Advertisement --------------
 Privatead_4 - the aa market has a day off
 Actual until: 22/05/2024, 0 days left
 
+Private Advertisement --------------
+Privatead_4 - the aa market has a day off
+Actual until: 22/05/2024, 0 days left
+
+Sale --------------
+Sale_3 - set of asian plates
+Price: 200.0 $, for Visa payment there is a 10% discount - price: 180.0 $
+
 Sale --------------
 Sale_3 - set of asian plates
 Price: 200.0 $, for Visa payment there is a 10% discount - price: 180.0 $
 
 News --------------
 News 4 - aliexpres got the reword for the best marketplace
-China, 23/03/2025 19:32
+China, 08/04/2025 00:04
+
+Sale --------------
+Sale_3 - set of asian plates
+Price: 200.0 $, for Visa payment there is a 10% discount - price: 180.0 $
+
+Sale --------------
+Sale_5 - backpack
+Price: 50.0 $, for Visa payment there is a 10% discount - price: 45.0 $
 
 Sale --------------
 Sale_5 - backpack
@@ -82,38 +58,10 @@ Private Advertisement --------------
 Privatead_3 - the bb library will be closed
 Actual until: 30/04/2024, 0 days left
 
-News --------------
-News 3 - gulf of mexico was renamed to gulf of usa
-Usa, 23/03/2025 19:32
-
-Sale --------------
-Sale_4 - mona lisa
-Price: 50000.0 $, for Visa payment there is a 10% discount - price: 45000.0 $
-
-Private Advertisement --------------
-Privatead_4 - the aa market has a day off
-Actual until: 22/05/2024, 0 days left
-
-Sale --------------
-Sale_3 - set of asian plates
-Price: 200.0 $, for Visa payment there is a 10% discount - price: 180.0 $
-
-News --------------
-News 4 - aliexpres got the reword for the best marketplace
-China, 23/03/2025 19:32
-
-Sale --------------
-Sale_5 - backpack
-Price: 50.0 $, for Visa payment there is a 10% discount - price: 45.0 $
-
 Private Advertisement --------------
 Privatead_3 - the bb library will be closed
 Actual until: 30/04/2024, 0 days left
 
-News --------------
-News 3 - gulf of mexico was renamed to gulf of usa
-Usa, 23/03/2025 19:33
-
 Sale --------------
 Sale_4 - mona lisa
 Price: 50000.0 $, for Visa payment there is a 10% discount - price: 45000.0 $
@@ -126,37 +74,9 @@ Sale --------------
 Sale_3 - set of asian plates
 Price: 200.0 $, for Visa payment there is a 10% discount - price: 180.0 $
 
-News --------------
-News 4 - aliexpres got the reword for the best marketplace
-China, 23/03/2025 19:33
-
-Sale --------------
-Sale_5 - backpack
-Price: 50.0 $, for Visa payment there is a 10% discount - price: 45.0 $
-
-Private Advertisement --------------
-Privatead_3 - the bb library will be closed
-Actual until: 30/04/2024, 0 days left
-
-News --------------
-News 3 - gulf of mexico was renamed to gulf of usa
-Usa, 23/03/2025 19:33
-
-Sale --------------
-Sale_4 - mona lisa
-Price: 50000.0 $, for Visa payment there is a 10% discount - price: 45000.0 $
-
-Private Advertisement --------------
-Privatead_4 - the aa market has a day off
-Actual until: 22/05/2024, 0 days left
-
 Sale --------------
 Sale_3 - set of asian plates
 Price: 200.0 $, for Visa payment there is a 10% discount - price: 180.0 $
-
-News --------------
-News 4 - aliexpres got the reword for the best marketplace
-China, 23/03/2025 19:33
 
 Sale --------------
 Sale_5 - backpack
@@ -164,119 +84,25 @@ Price: 50.0 $, for Visa payment there is a 10% discount - price: 45.0 $
 
 News --------------
 Has an Lodz Poltecnika
-Lodz, 31/03/2025 01:42
+Lodz, 08/04/2025 00:09
 
 Private Advertisement --------------
 2 tickets to OE
-Actual until: 28/04/2025, 27 days left
-
-Sale --------------
-Bad
-Price: 500.0 $, for Visa payment there is a 10% discount - price: 450.0 $News --------------
-Many skyscrapers
-Los Angeles, 31/03/2025 01:58
-
-Private Advertisement --------------
-Can help with home cleaning
-Actual until: 28/04/2025, 27 days left
-
-Sale --------------
-Roller blades
-Price: 60.0 $, for Visa payment there is a 10% discount - price: 54.0 $
-
-News --------------
-Has an Lodz Poltecnika
-Lodz, 31/03/2025 01:58
-
-Private Advertisement --------------
-2 tickets to OE
-Actual until: 28/04/2025, 27 days left
+Actual until: 28/04/2025, 19 days left
 
 Sale --------------
 Bad
 Price: 500.0 $, for Visa payment there is a 10% discount - price: 450.0 $
 
 News --------------
-Default News Text
-Default City, 02/04/2025 23:59
-
-Private Advertisement --------------
-Default Private Ad Text
-Actual until: 01/01/2025, 0 days left
-
-Sale --------------
-Default Sale Text
-Price: 0.0 $, for Visa payment there is a 10% discount - price: 0.0 $
-
-News --------------
 New casino opens!
-New York, 03/04/2025 00:09
+New York, 08/04/2025 00:15
 
 Private Advertisement --------------
 Roommate needed for UKU dormitory
-Actual until: 15/05/2025, 41 days left
+Actual until: 15/05/2025, 36 days left
 
 Sale --------------
 Persian kitten
 Price: 15.0 $, for Visa payment there is a 10% discount - price: 13.5 $
-
-News --------------
-Flooding in Greece
-Islands, 03/04/2025 00:16
-
-News --------------
-Weather update: Rain expected tomorrow.
-London, 03/04/2025 00:16
-
-Private Advertisement --------------
-Roommate needed urgently
-Actual until: 15/05/2025, 41 days left
-
-Private Advertisement --------------
-Office space for rent
-Actual until: 01/06/2025, 58 days left
-
-Sale --------------
-Apartments on Shevchenka str., 5 rooms, 200 sq.m.
-Price: 98000.0 $, for Visa payment there is a 10% discount - price: 88200.0 $
-
-Sale --------------
-Exclusive price for headset FA-21 for Black Friday in Auchan!
-Price: 299.99 $, for Visa payment there is a 10% discount - price: 269.99100000000004 $
-
-News --------------
-New casino opens!
-New York, 03/04/2025 00:18
-
-Private Advertisement --------------
-Roommate needed for UKU dormitory
-Actual until: 15/05/2025, 41 days left
-
-Sale --------------
-Persian kitten
-Price: 15.0 $, for Visa payment there is a 10% discount - price: 13.5 $
-
-News --------------
-Flooding in Greece
-Islands, 03/04/2025 00:19
-
-News --------------
-Weather update: Rain expected tomorrow.
-London, 03/04/2025 00:19
-
-Private Advertisement --------------
-Roommate needed urgently
-Actual until: 15/05/2025, 41 days left
-
-Private Advertisement --------------
-Office space for rent
-Actual until: 01/06/2025, 58 days left
-
-Sale --------------
-Apartments on Shevchenka str., 5 rooms, 200 sq.m.
-Price: 98000.0 $, for Visa payment there is a 10% discount - price: 88200.0 $
-
-Sale --------------
-Exclusive price for headset FA-21 for Black Friday in Auchan!
-Price: 299.99 $, for Visa payment there is a 10% discount - price: 269.99100000000004 $
 
